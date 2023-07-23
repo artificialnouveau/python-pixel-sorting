@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from PIL import Image
 from random import choice
-import matplotlib.pyplot as plt
+import os
 
 def pixel_sort(image, direction):
     sorted_pixels = np.sort(image, axis=direction)
@@ -51,6 +51,7 @@ pil_image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 direction = choice([0, 1])  # Randomly choose a direction
 sorted_image = pixel_sort(np.array(pil_image), direction)
 
-# Display the image
-plt.imshow(sorted_image)
-plt.show()
+# Save the image
+filename, file_extension = os.path.splitext(args.image_path)
+sorted_image_path = f"{filename}_sorted{file_extension}"
+sorted_image.save(sorted_image_path)
